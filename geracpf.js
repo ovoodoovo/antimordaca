@@ -37,10 +37,10 @@ const sortear = function(cpf) {
             {
                 points += 0.9;
             }
-            // pontos extra para números próximos
+            // menos pontos para números distantes
             else
             {
-                points += Math.abs(parseInt(numCpf[j]) - parseInt(novoCpf[j])) * 0.05;
+                points += Math.abs(parseInt(numCpf[j]) - parseInt(novoCpf[j])) * 0.01;
             }
         }
 
@@ -65,11 +65,15 @@ const listarCpfs = function() {
 
     const lstResult = $("#resultados");
 
+    $(this).prop("disable", true);
+
     lstResult.empty();
 
     result.forEach(function(item) {
-        lstResult.append("<li>" + item.points.toFixed(1) + " - " + item.cpf + "</li>");
+        lstResult.append('<li>' + item.cpf  + ' - ' + item.points.toFixed(2) + ' pontos</li>');
     });
+
+    $(this).prop("disable", false);
 }
 
 const limparCpfs = function() {
